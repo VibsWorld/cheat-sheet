@@ -3,7 +3,12 @@
 * [DOCKER START](#docker-start)
 * [DOCKER PS](#docker-ps)
 * [DOCKER ATTACH and DOCKER LOGS](#DOCKER-ATTACH-and-DOCKER-LOGS)
-## DOCKER RUN
+* [DOCKER RM and DOCKER RMI Delete](#DOCKER-RM-and-DOCKER-RMI-Delete)
+* [DOCKER TAG Renaming Images](#DOCKER-TAG-Renaming-Images)
+* [DOCKER CONTAINER RENAME](#DOCKER-CONTAINER-RENAME)
+* [DOCKER EXEC](#DOCKER-EXEC-Opening-Interactive-Terminal-in-an-existing-container)
+  
+### DOCKER RUN
 ```
 # Running with a docker image in a deattached mode
 docker run --name <CustomContainerName> -p 8080:8080 -d <ImageName>
@@ -49,7 +54,7 @@ docker logs <container_name>
 docker logs -f <container_name> 
 ```
 
-DOCKER RM and DOCKER RMI (Delete)
+### DOCKER RM and DOCKER RMI Delete
 ```
 # Docker delete
 docker rm <container_name>
@@ -61,7 +66,7 @@ docker rmi <image_id>
 docker rimi <image1> <image2> 
 ```
 
-DOCKER TAG (Renaming Images)
+### DOCKER TAG Renaming Images
 ```
 # Image Rename
 docker tag 0e5574283393 fedora/httpd:version1.0do
@@ -78,7 +83,7 @@ DOCKER CONTAINER RENAME
 docker rename my_container my_new_container
 ```
 
-DOCKER EXEC (Opening Interactive Terminal in an existing container)
+### DOCKER EXEC Opening Interactive Terminal in an existing container
 ```
 Opening Interactive Terminal in an existing container
 #Usage
@@ -88,7 +93,7 @@ docker exec -it <container_name> bash
 docker exec -it rabbitmq bash
 ```
 
-Update a container's restart policy (--restart)
+### Update a container restart policy
 You can change a container's restart policy on a running container. The new restart policy takes effect instantly after you run docker update on a container.
 To update restart policy for one or more containers:
  ```
