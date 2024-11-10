@@ -1,4 +1,8 @@
-
+* [DOCKER RUN](#docker-run) 
+* [DOCKER IMAGES](#docker-images)
+* [DOCKER START](#docker-start)
+* [DOCKER PS](#docker-ps)
+* [DOCKER ATTACH and DOCKER LOGS](#DOCKER-ATTACH-and-DOCKER-LOGS)
 ## DOCKER RUN
 ```
 # Running with a docker image in a deattached mode
