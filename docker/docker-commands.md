@@ -7,13 +7,13 @@
 * [DOCKER TAG Renaming Images](#DOCKER-TAG-Renaming-Images)
 * [DOCKER CONTAINER RENAME](#DOCKER-CONTAINER-RENAME)
 * [DOCKER EXEC](#DOCKER-EXEC-Opening-Interactive-Terminal-in-an-existing-container)
+
+* <https://www.linkedin.com/posts/tauseeffayyaz_ultimate-dockers-guide-activity-7276842556506689536-fdip/?utm_source=share&utm_medium=member_desktop>
   
 ### DOCKER RUN
 ```
 # Running with a docker image in a deattached mode
 docker run --name <CustomContainerName> -p 8080:8080 -d <ImageName>
-
-
 ```
 
 ### DOCKER IMAGES
