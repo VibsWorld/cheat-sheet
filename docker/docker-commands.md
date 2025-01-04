@@ -25,6 +25,9 @@ docker run hello-world
 ```
 # Running with a docker image in a deattached mode
 docker run --name <CustomContainerName> -p 8080:8080 -d <ImageName>
+
+# Start interactive ubuntu
+docker run -it ubuntu bash
 ```
 
 ### DOCKER IMAGES
