@@ -1,3 +1,4 @@
+* [Docker Info Commands](#docker-info)
 * [DOCKER RUN](#docker-run) 
 * [DOCKER IMAGES](#docker-images)
 * [DOCKER START](#docker-start)
@@ -9,6 +10,16 @@
 * [DOCKER EXEC](#DOCKER-EXEC-Opening-Interactive-Terminal-in-an-existing-container)
 
 * <https://www.linkedin.com/posts/tauseeffayyaz_ultimate-dockers-guide-activity-7276842556506689536-fdip/?utm_source=share&utm_medium=member_desktop>
+
+### Docker Info
+```
+docker --version
+docker version
+docker info
+
+# This is used to test docker environment 
+docker run hello-world
+```
   
 ### DOCKER RUN
 ```
