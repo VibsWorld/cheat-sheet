@@ -40,3 +40,10 @@ kubectl describe pods padauk --namespace cd-sandboxconfig
 kubectl -n cd-sandboxconfig get pods --selector=app.kubernetes.io/name=padauk -o name
 kubectl -n cd-sandboxconfig get pods --sort-by=.metadata.creationTimestamp --selector=app.kubernetes.io/name=olive -o jsonpath="{.items[0].metadata.name}"
 ```
+## Kubectl Get All pods with specific search pattern
+```
+kubectl get pods -n <your_namespace> | grep "^<search_pattern"
+# Powershell
+kubectl get pods | Select-String "partial-name"
+kubectl get pods --all-namespaces | grep "birch"
+```
