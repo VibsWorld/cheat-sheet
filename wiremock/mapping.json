@@ -1,0 +1,83 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/api/v2/tickets"
+            },
+            "response": {
+                "status": 201,
+                "bodyFileName": "zendesk_success_response.json",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "urlPath": "/api/v2/users/search.json"
+            },
+            "response": {
+                "status": 200,
+                "bodyFileName": "zendesk_success_response_search_user.json",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "urlPathTemplate": "/api/v2/users/{userId}.json"
+            },
+            "response": {
+                "status": 200,
+                "bodyFileName": "zendesk_success_response_search_user.json",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        }
+        ,
+        {
+            "request": {
+                "method": "PUT",
+                "urlPathTemplate": "/api/v2/tickets/{ticketId}"
+            },
+            "response": {
+                "status": 200,
+                "bodyFileName": "zendesk_success_response.json",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "urlPathTemplate": "/api/v2/tickets/{ticketId}"
+            },
+            "response": {
+                "status": 200,
+                "bodyFileName": "zendesk_success_response.json",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "urlPathTemplate": "/v3/shipments/{draftShipmentId}"
+            },
+            "response": {
+                "status": 200,
+                "bodyFileName": "olive_success_response.json",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            }
+        }
+    ]
+}
