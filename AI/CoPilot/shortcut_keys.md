@@ -10,3 +10,6 @@ Ref: [Keyboard shortcuts for Window (Original Reference) ](https://docs.github.c
 | Accept next line | Ctrl + ↓ (Down Arrow) |
 | Trigger suggestion | Alt + \ (or Alt + . / ,) |
 | Next/Previous suggestion | Alt + ] / Alt + [ |
+
+### Best Pratices 
+<https://docs.github.com/en/copilot/get-started/best-practices> 
