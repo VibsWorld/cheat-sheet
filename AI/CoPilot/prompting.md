@@ -39,8 +39,16 @@ Verifying Outputs
 * use LLM as judge ⚠️ (_treat it as an additional tool only_). Be upfront about that for example be clear like _this is an AI Generated text_
   * <img width="1352" height="756" alt="image" src="https://github.com/user-attachments/assets/7bec2815-875b-4c50-bfb4-1cd9cf26691e" />
  
+#### Video Prompting
+Tools example
+* Google Veo
+* OpenAI Sora
+* Runway
+* Invideo AI
 
-References: https://learning.oreilly.com/videos/prompt-engineering-basics/9780135496909 by Kate Harwood
+Use a Prompt or article e.g `street inverview` etc
+
+References: https://learning.oreilly.com/videos/prompt-engineering-basics/9780135496909 by Kate Harwood. 
 
 
 
