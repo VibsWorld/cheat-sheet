@@ -1,5 +1,5 @@
 Healthchecks for Postgres, Rabbitmq and normal image
-````
+````yaml
 services:
   postgres:
     image: postgres
@@ -87,7 +87,7 @@ networks:
 ````
 
 More Health Checks Examples
-```
+```yaml
 services:
   eventstore:
     image: kurrentplatform/kurrentdb:latest
