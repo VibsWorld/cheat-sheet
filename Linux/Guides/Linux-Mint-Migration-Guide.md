@@ -40,10 +40,10 @@
 - **[Linux Mint Essentials](https://www.oreilly.com/library/view/linux-mint-essentials/9781782168157/ch01.html)**
   Covers Mint basics: installation, configuration, and daily use.
 
-- **The Linux Command Line** by William Shotts
+- **[The Linux Command Line](https://www.oreilly.com/library/view/the-linux-command/9781492071235/)** by William Shotts
   Must-read for getting comfortable with the terminal. Covers Bash, filesystem, permissions, package management, and scripting.
 
-- **How Linux Works (3rd Edition)** by Brian Ward
+- **[How Linux Works (3rd Edition)](https://www.oreilly.com/library/view/how-linux-works/9781098128913/)** by Brian Ward
   Great for understanding what's happening under the hood — boot process, networking, storage, and more.
 
 #### Video Course
@@ -55,7 +55,7 @@
 
 ### YouTube Channels
 
-- **LearnLinuxTV** (Jay LaCroix)
+- **[LearnLinuxTV](https://www.youtube.com/@LearnLinuxTV)** (Jay LaCroix)
   Has a dedicated **Linux Mint Beginners Guide** series covering:
   - Introduction and installation
   - Exploring the desktop
@@ -67,10 +67,10 @@
   - Basic security
   - Troubleshooting
 
-- **Chris Titus Tech**
-  Practical Linux Mint tips, performance tuning, and customization — especially useful for Windows migrants.
+- **[Chris Titus Tech](https://www.youtube.com/@ChrisTitusTech)**
+  Practical Linux Mint tips, performance tuning, and customization — especially useful for Windows migrants. Also has a dedicated ["Windows 10 to Linux Mint" series](https://forums.linuxmint.com/viewtopic.php?t=318963).
 
-- **The Linux Experiment**
+- **[The Linux Experiment](https://www.youtube.com/@TheLinuxExperiment)**
   Weekly Linux news, frequently covers Mint updates and Cinnamon desktop improvements.
 
 ---
@@ -155,12 +155,12 @@ sudo apt-get install -y dotnet-sdk-8.0
 
 ## Suggested Learning Path
 
-1. **Watch** the LearnLinuxTV YouTube series (free, visual, beginner-friendly)
+1. **Watch** the [LearnLinuxTV](https://www.youtube.com/@LearnLinuxTV) YouTube series (free, visual, beginner-friendly)
 2. **Install** Linux Mint Cinnamon (try it via USB first without installing)
 3. **Follow** the [Easy Linux Tips Project](https://easylinuxtipsproject.blogspot.com/p/first-mint-cinnamon.html) post-install checklist
-4. **Read** "Learning Modern Linux" on O'Reilly for deeper understanding
+4. **Read** ["Learning Modern Linux"](https://www.oreilly.com/library/view/learning-modern-linux/9781098108939/) on O'Reilly for deeper understanding
 5. **Set up** your .NET dev environment (VS Code / Rider + .NET SDK + Docker)
-6. **Practice** terminal basics with "The Linux Command Line" book
+6. **Practice** terminal basics with ["The Linux Command Line"](https://www.oreilly.com/library/view/the-linux-command/9781492071235/) book
 7. **Join** the [Linux Mint Forums](https://forums.linuxmint.com/) and [r/linuxmint](https://www.reddit.com/r/linuxmint/) for community support
 
 ---
