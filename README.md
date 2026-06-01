@@ -61,6 +61,9 @@ A centralized collection of quick-reference guides, walkthroughs, and notes for 
 
 | Guide | Description |
 |-------|-------------|
+| [Aider Setup Guide](AI/Aider/install.md) | Windows 10 setup guide for Aider AI coding assistant with Ollama integration |
+| [Claude CLI Skills Implementation Guide](AI/Claude/claude_cli_skills_implementation_guide.md) | Building reusable API-to-PDF-to-Email skills for Claude Code CLI in Python and C# |
+| [Clean Uninstall of Claude Code](AI/Claude/uninstall_claude_clean.md) | Complete removal of Claude Code on Windows including cached data, logs, and credentials |
 | [Prompting Techniques](AI/CoPilot/prompting.md) | Zero-shot, few-shot, chain-of-thought, prompt chaining, reverse prompting, output verification, and video prompting tools |
 | [GitHub Copilot Shortcuts](AI/CoPilot/shortcut_keys.md) | VS Code keyboard shortcuts for Copilot inline suggestions |
 
@@ -75,3 +78,4 @@ A centralized collection of quick-reference guides, walkthroughs, and notes for 
 | Guide | Description |
 |-------|-------------|
 | [Hosting Helpers](tools/hosting-helpers/list.md) | Collection of hosting and deployment helper tools |
+| [ON24 Recording Download Guide](tools/streaming/e24-help/ON24_Download_Guide.md) | Download recorded live event streams from ON24 platform (e.g., O'Reilly Media) using yt-dlp and ffmpeg |
