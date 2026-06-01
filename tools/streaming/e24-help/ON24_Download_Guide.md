@@ -1,7 +1,7 @@
 # ON24 Recording Download Guide for Windows 10
 
 > **Author:** Vaibhav A  
-> **Last Updated:** 2026-05-30  
+> **Last Updated:** 2026-06-01  
 > **Target Platform:** Windows 10 (with Git Bash, Docker Desktop, WSL installed)  
 > **Purpose:** Download recorded live event streams from ON24 platform (e.g., O'Reilly Media)
 
@@ -15,6 +15,8 @@
     - [2. Install yt-dlp](#2-install-yt-dlp)
     - [3. Install Browser Cookie Exporter](#3-install-browser-cookie-exporter)
 3. [Method 1: yt-dlp (Recommended)](#method-1-yt-dlp-recommended)
+    - [Step 5: Download Highest Quality](#step-5-download-highest-quality)
+    - [Using youtube-dl (Alternative)](#using-youtube-dl-alternative)
 4. [Method 2: Browser Developer Tools + ffmpeg](#method-2-browser-developer-tools--ffmpeg)
 5. [Method 3: Download Slides + Audio (Bonus)](#method-3-download-slides--audio-bonus)
 6. [Method 4: Screen Recording (Last Resort)](#method-4-screen-recording-last-resort)
@@ -96,7 +98,29 @@ Open **PowerShell** and run:
 winget install yt-dlp.yt-dlp
 ```
 
-#### Option B: Manual Download
+#### Option B: pip / pipx (Requires Python)
+
+If you already have Python installed, this is the fastest method:
+
+```powershell
+# Using pip
+pip install yt-dlp
+
+# Or using pipx (isolated environment, no dependency conflicts)
+pipx install yt-dlp
+```
+
+> **Note:** If you have both Python 2 and Python 3, use `pip3 install yt-dlp` to ensure it installs under Python 3.
+
+To upgrade later:
+
+```powershell
+pip install --upgrade yt-dlp
+# Or with pipx:
+pipx upgrade yt-dlp
+```
+
+#### Option C: Manual Download
 
 ```powershell
 # Download the exe
@@ -129,7 +153,7 @@ yt-dlp -U
 
 ### 3. Install Browser Cookie Exporter
 
-y-dlp needs your browser cookies to authenticate with ON24 through your O'Reilly account.
+yt-dlp needs your browser cookies to authenticate with ON24 through your O'Reilly account.
 
 #### For Google Chrome / Microsoft Edge / Brave
 
@@ -218,6 +242,57 @@ video   mp4  unknown     https  avc1.640020 mp4a.40.2
 ```
 
 ON24 typically provides a single MP4 video stream and an audio-only WAV stream.
+
+#### Step 5: Download Highest Quality
+
+`yt-dlp` defaults to downloading the best available quality, but you can be explicit with format selectors:
+
+```bash
+# Highest quality video+audio (recommended for most use cases)
+yt-dlp --cookies-from-browser chrome -f "bestvideo+bestaudio/best" -o "lecture.mp4" "URL"
+
+# Highest quality video+audio merged into MP4 container
+yt-dlp --cookies-from-browser chrome -f "bestvideo+bestaudio" --merge-output-format mp4 -o "lecture.mp4" "URL"
+
+# Best single pre-merged file (no remuxing needed)
+yt-dlp --cookies-from-browser chrome -f "best" -o "lecture.mp4" "URL"
+
+# Highest quality video only (no audio)
+yt-dlp --cookies-from-browser chrome -f "bestvideo" -o "lecture_video.mp4" "URL"
+
+# Highest quality audio only
+yt-dlp --cookies-from-browser chrome -f "bestaudio" -o "lecture_audio.wav" "URL"
+
+# Download a specific format (use format IDs from -F output)
+yt-dlp --cookies-from-browser chrome -f "video" -o "lecture.mp4" "URL"
+```
+
+> **Tip:** For ON24 streams, the format IDs shown by `-F` are typically `video` and `audio`. Since ON24 usually offers a single video stream, the default behavior (`-f "bestvideo+bestaudio/best"`) already selects the highest quality. Use `-F` first to see what's available before choosing a specific format.
+
+#### Using youtube-dl (Alternative)
+
+`youtube-dl` is the predecessor of `yt-dlp`. It is no longer actively maintained but may still be installed on some systems. Its highest-quality flags are slightly different:
+
+```powershell
+# Install (pip only — no winget package)
+pip install youtube-dl
+```
+
+```bash
+# Highest quality video+audio
+youtube-dl -f "bestvideo+bestaudio/best" -o "lecture.mp4" "URL"
+
+# Best single pre-merged file
+youtube-dl -f "best" -o "lecture.mp4" "URL"
+
+# Highest quality video only (no audio)
+youtube-dl -f "bestvideo" -o "lecture_video.mp4" "URL"
+
+# Highest quality audio only
+youtube-dl -f "bestaudio" -o "lecture_audio.wav" "URL"
+```
+
+> **⚠️ Warning:** `youtube-dl` does **not** have a native ON24 extractor. It will not work for ON24 streams unless the direct stream URL is provided. For ON24, always prefer `yt-dlp`.
 
 #### Full Command Reference
 
@@ -549,24 +624,29 @@ This API returns JSON with the actual video URLs, which yt-dlp then downloads.
 # 1. Install tools (PowerShell as Admin)
 winget install ffmpeg
 winget install yt-dlp.yt-dlp
+# Or with pip: pip install yt-dlp
 
 # 2. Update yt-dlp
 yt-dlp -U
+# Or with pip: pip install --upgrade yt-dlp
 
 # 3. Download video (close browser first!)
 yt-dlp --cookies-from-browser chrome -o "lecture.mp4" "ON24_URL"
 
-# 4. List available formats
+# 4. Download HIGHEST quality video+audio
+yt-dlp --cookies-from-browser chrome -f "bestvideo+bestaudio/best" --merge-output-format mp4 -o "lecture.mp4" "ON24_URL"
+
+# 5. List available formats
 yt-dlp --cookies-from-browser chrome -F "ON24_URL"
 
-# 5. Download audio only
+# 6. Download audio only
 yt-dlp --cookies-from-browser chrome -f audio -o "lecture.wav" "ON24_URL"
 
-# 6. Manual stream capture
+# 7. Manual stream capture
 # F12 → Network → filter mp4 → copy URL → 
 ffmpeg -i "STREAM_URL" -c copy output.mp4
 
-# 7. Poor connection workaround
+# 8. Poor connection workaround
 yt-dlp --cookies-from-browser chrome -o "lecture.mp4" --retries 10 --limit-rate 1M "ON24_URL"
 ```
 
