@@ -65,6 +65,7 @@ A centralized collection of quick-reference guides, walkthroughs, and notes for 
 | [Claude CLI Skills Implementation Guide](AI/Claude/claude_cli_skills_implementation_guide.md) | Building reusable API-to-PDF-to-Email skills for Claude Code CLI in Python and C# |
 | [Clean Uninstall of Claude Code](AI/Claude/uninstall_claude_clean.md) | Complete removal of Claude Code on Windows including cached data, logs, and credentials |
 | [10 GitHub Repos to Level Up Claude Code](AI/Claude/claude-code-repos.md) | Curated list of community repos for agents, skills, hooks, subagents, templates, and best practices |
+| [Claude Code: Beginner to Ninja](AI/Claude/step_by_step_guide.md) | Step-by-step learning path from installation to multi-agent orchestration and custom harnesses |
 | [Prompting Techniques](AI/CoPilot/prompting.md) | Zero-shot, few-shot, chain-of-thought, prompt chaining, reverse prompting, output verification, and video prompting tools |
 | [GitHub Copilot Shortcuts](AI/CoPilot/shortcut_keys.md) | VS Code keyboard shortcuts for Copilot inline suggestions |
 
