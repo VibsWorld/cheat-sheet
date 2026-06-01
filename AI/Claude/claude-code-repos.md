@@ -2,6 +2,8 @@
 
 Curated list of community repositories that extend Claude Code with agents, skills, hooks, subagents, templates, and best practices.
 
+> **New to Claude Code?** Follow the [Beginner to Ninja step-by-step guide](step_by_step_guide.md) to learn these repos in the right order.
+
 ---
 
 ## 1. Claude Swarm — affaan-m
