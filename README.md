@@ -79,5 +79,6 @@ A centralized collection of quick-reference guides, walkthroughs, and notes for 
 
 | Guide | Description |
 |-------|-------------|
+| [GitHub CLI (`gh`) Cheat Sheet](tools/gh-cli.md) | Common `gh` commands for repos, PRs, issues, releases, and API calls |
 | [Hosting Helpers](tools/hosting-helpers/list.md) | Collection of hosting and deployment helper tools |
 | [ON24 Recording Download Guide](tools/streaming/e24-help/ON24_Download_Guide.md) | Download recorded live event streams from ON24 platform (e.g., O'Reilly Media) using yt-dlp and ffmpeg |
