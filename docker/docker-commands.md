@@ -35,8 +35,14 @@ docker run -it ubuntu bash
 # List images
 docker images
 
+# To remove all unused images, including dangling images and those with no containers associated, use the -a or --all flag:
+docker image prune -a
+
 # Remove all unused images
 docker images prune
+
+# Complete clean up
+docker system prune
 
 # Show history associated with a image
 # docker image history <docker_registry>/<image>:<version>

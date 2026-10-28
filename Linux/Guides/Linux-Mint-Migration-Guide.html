@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Mint Cinnamon Migration Guide for .NET Developers</title>
+    <style>
+        :root {
+            --mint-green: #87cf3e;
+            --mint-dark: #2b3e2e;
+            --mint-light: #f0f9e8;
+            --mint-accent: #6db33f;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6a7a;
+            --bg-white: #ffffff;
+            --bg-gray: #f8faf5;
+            --border-color: #d4e8c2;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-gray);
+            line-height: 1.7;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--mint-dark) 0%, #3a5a3e 50%, var(--mint-accent) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 18px;
+        }
+
+        /* Navigation */
+        .toc {
+            background: var(--bg-white);
+            border-bottom: 2px solid var(--border-color);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .toc-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .toc a {
+            color: var(--mint-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            background: var(--mint-light);
+            color: var(--mint-accent);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 36px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--mint-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--mint-green);
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--mint-accent);
+            margin: 28px 0 14px;
+        }
+
+        h3:first-of-type {
+            margin-top: 20px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--mint-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        thead th {
+            background: var(--mint-dark);
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        thead th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        thead th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--mint-light);
+        }
+
+        tbody tr:hover {
+            background: #e8f5d8;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h4 {
+            font-size: 1.05rem;
+            color: var(--mint-dark);
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: var(--mint-light);
+            color: var(--mint-accent);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        /* Resource List */
+        .resource-item {
+            display: flex;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: flex-start;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .resource-icon.book { background: #e8f0fe; }
+        .resource-icon.video { background: #fce8e8; }
+        .resource-icon.course { background: #fef3e0; }
+        .resource-icon.web { background: var(--mint-light); }
+
+        .resource-body h4 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .resource-body p {
+            font-size: 0.88rem;
+            margin-bottom: 0;
+        }
+
+        /* Code Block */
+        pre {
+            background: #1e2a1e;
+            color: #c8e6c9;
+            padding: 20px 24px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            margin: 16px 0;
+        }
+
+        pre .comment {
+            color: #6a9955;
+        }
+
+        pre .command {
+            color: #87cf3e;
+        }
+
+        /* Status Badges */
+        .status-works {
+            display: inline-block;
+            background: #e6f9e6;
+            color: #2d8a2d;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-no {
+            display: inline-block;
+            background: #fdecea;
+            color: #c62828;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Learning Path */
+        .timeline {
+            position: relative;
+            padding-left: 36px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--mint-green), var(--mint-dark));
+            border-radius: 3px;
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .timeline-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -36px;
+            width: 28px;
+            height: 28px;
+            background: var(--mint-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .timeline-step h4 {
+            font-size: 1rem;
+            color: var(--mint-dark);
+            margin-bottom: 4px;
+        }
+
+        .timeline-step p {
+            font-size: 0.9rem;
+        }
+
+        /* Callout */
+        .callout {
+            background: var(--mint-light);
+            border-left: 4px solid var(--mint-green);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+        }
+
+        .callout strong {
+            color: var(--mint-dark);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.7rem; }
+            section { padding: 24px 18px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .toc-inner { justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Linux Mint Cinnamon Migration Guide</h1>
+        <p class="subtitle">A curated resource guide for .NET developers migrating from Windows 10 to Linux Mint Cinnamon</p>
+        <span class="badge">April 2026</span>
+    </div>
+
+    <!-- Table of Contents -->
+    <nav class="toc">
+        <div class="toc-inner">
+            <a href="#why-mint">Why Mint</a>
+            <a href="#alternatives">Alternatives</a>
+            <a href="#oreilly">O'Reilly</a>
+            <a href="#youtube">YouTube</a>
+            <a href="#courses">Courses</a>
+            <a href="#books">Books</a>
+            <a href="#free-resources">Free Resources</a>
+            <a href="#dotnet">.NET on Linux</a>
+            <a href="#learning-path">Learning Path</a>
+            <a href="#tools">Built-in Tools</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Why Linux Mint -->
+        <section id="why-mint">
+            <h2>Why Linux Mint Cinnamon?</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Windows-like experience</strong></td>
+                        <td>Familiar desktop layout &mdash; taskbar, start menu, system tray</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No bloatware</strong></td>
+                        <td>No snap packages by default, minimal install (~8GB)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ubuntu-based</strong></td>
+                        <td>Access to the massive Ubuntu/Debian package ecosystem</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lightweight</strong></td>
+                        <td>Runs smoothly on older hardware that can't handle Windows 11</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Great hardware support</strong></td>
+                        <td>Excellent driver compatibility out of the box</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Developer-friendly</strong></td>
+                        <td>Full support for .NET SDK, Docker, VS Code, and JetBrains Rider</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Alternatives -->
+        <section id="alternatives">
+            <h2>Alternative Distros Considered</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Fedora Workstation</h4>
+                    <p>Cutting-edge packages, great for containers and Podman, SELinux security built-in.</p>
+                    <span class="tag">Advanced</span>
+                </div>
+                <div class="card">
+                    <h4>Linux Mint XFCE</h4>
+                    <p>Even lighter than Cinnamon with the same Mint benefits. Great for very old hardware.</p>
+                    <span class="tag">Ultra-light</span>
+                </div>
+                <div class="card">
+                    <h4>Pop!_OS</h4>
+                    <p>Developer-focused with excellent GPU support for AI/ML workloads.</p>
+                    <span class="tag">Developer</span>
+                </div>
+                <div class="card">
+                    <h4>Zorin OS</h4>
+                    <p>Very polished Windows-like UI. Free version available, Pro edition is paid.</p>
+                    <span class="tag">Windows-like</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- O'Reilly Resources -->
+        <section id="oreilly">
+            <h2>O'Reilly Resources</h2>
+            <p>Available with your O'Reilly subscription.</p>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128214;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.oreilly.com/library/view/learning-modern-linux/9781098108939/" target="_blank">Learning Modern Linux</a></h4>
+                    <p>Excellent for understanding the Linux ecosystem as a developer &mdash; filesystem, networking, containers, and shell scripting.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128214;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.oreilly.com/library/view/linux-mint-essentials/9781782168157/ch01.html" target="_blank">Linux Mint Essentials</a></h4>
+                    <p>Covers Mint basics: installation, configuration, and daily use.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128214;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.oreilly.com/library/view/the-linux-command/9781492071235/" target="_blank">The Linux Command Line</a> <span style="color:#999">&mdash; by William Shotts</span></h4>
+                    <p>Must-read for getting comfortable with the terminal. Covers Bash, filesystem, permissions, package management, and scripting.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128214;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.oreilly.com/library/view/how-linux-works/9781098128913/" target="_blank">How Linux Works (3rd Edition)</a> <span style="color:#999">&mdash; by Brian Ward</span></h4>
+                    <p>Great for understanding what's happening under the hood &mdash; boot process, networking, storage, and more.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon video">&#127909;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.oreilly.com/videos/learning-linux-mint/9781771373432/9781771373432-video209209/" target="_blank">Learning Linux Mint (Video Course)</a></h4>
+                    <p>Video course by Daryl Wood covering the Mint desktop, panel, and workflows.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- YouTube -->
+        <section id="youtube">
+            <h2>YouTube Channels</h2>
+
+            <div class="resource-item">
+                <div class="resource-icon video">&#9654;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.youtube.com/@LearnLinuxTV" target="_blank">LearnLinuxTV (Jay LaCroix)</a></h4>
+                    <p>Dedicated <strong>Linux Mint Beginners Guide</strong> series covering: installation, desktop exploration, app management, customization, workspaces, Timeshift backups, command line intro, security, and troubleshooting. <strong>Best starting point on YouTube.</strong></p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon video">&#9654;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.youtube.com/@ChrisTitusTech" target="_blank">Chris Titus Tech</a></h4>
+                    <p>Practical Linux Mint tips, performance tuning, and customization &mdash; especially useful for Windows migrants. Also has a dedicated <a href="https://forums.linuxmint.com/viewtopic.php?t=318963" target="_blank">"Windows 10 to Linux Mint" series</a>.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon video">&#9654;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.youtube.com/@TheLinuxExperiment" target="_blank">The Linux Experiment</a></h4>
+                    <p>Weekly Linux news, frequently covers Mint updates and Cinnamon desktop improvements.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Online Courses -->
+        <section id="courses">
+            <h2>Online Courses</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><a href="https://www.udemy.com/course/linux-mint/" target="_blank">Learn Linux Mint &mdash; Complete Beginners</a></h4>
+                    <p>Udemy course (2026). Structured for complete beginners, covers installation and configuration.</p>
+                    <span class="tag">Udemy</span>
+                </div>
+                <div class="card">
+                    <h4><a href="https://www.classcentral.com/subject/linux-mint" target="_blank">30+ Linux Mint Courses</a></h4>
+                    <p>Class Central aggregated list of free and paid Linux Mint courses across platforms.</p>
+                    <span class="tag">Class Central</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Books (Amazon) -->
+        <section id="books">
+            <h2>Books (Amazon / Kindle)</h2>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128218;</div>
+                <div class="resource-body">
+                    <h4><a href="https://www.amazon.com/Linux-Mint-Bible-Step-Step/dp/B0G59RRQXY" target="_blank">Linux Mint 22 Bible</a> <span style="color:#999">&mdash; by Felix Williams</span></h4>
+                    <p>Written for Windows power users and developers switching to Mint Cinnamon. Covers the full journey from Windows to Mint mastery.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128218;</div>
+                <div class="resource-body">
+                    <h4><a href="https://us.amazon.com/Linux-Mint-Cinnamon-Complete-Beginners/dp/B0GLFVX9JR" target="_blank">Linux Mint Cinnamon Edition: A Complete Guide</a> <span style="color:#999">&mdash; by David A. Rodgers</span></h4>
+                    <p>From installation to advanced configuration. Focuses on graphical tools first, terminal only when needed.</p>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <div class="resource-icon book">&#128218;</div>
+                <div class="resource-body">
+                    <h4><a href="https://us.amazon.com/LINUX-MINT-MADE-EASY-BEGINNERS-ebook/dp/B0GSBMJ7S2" target="_blank">Linux Mint 22 Made Easy for Beginners 2026</a> <span style="color:#999">&mdash; by Jose Bradford</span></h4>
+                    <p>Step-by-step guide with exercises to verify your learning.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Free Resources -->
+        <section id="free-resources">
+            <h2>Free Online Resources</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://easylinuxtipsproject.blogspot.com/p/first-mint-cinnamon.html" target="_blank">Easy Linux Tips Project</a></td>
+                        <td>Essential post-install checklist &mdash; "10 Things to Do First in Linux Mint Cinnamon"</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/mikeroyal/Linux-Mint-Guide" target="_blank">Linux Mint Guide (GitHub)</a></td>
+                        <td>Community-maintained comprehensive guide covering everything from basics to advanced topics</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://itsfoss.com/linux-mint-basic-settings/" target="_blank">It's FOSS &mdash; Mint Basic Settings</a></td>
+                        <td>Three essential tools every new Mint user should know</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://linuxmint-developer-guide.readthedocs.io/en/latest/cinnamon.html" target="_blank">Mint Developer Guide</a></td>
+                        <td>Official developer documentation for Cinnamon desktop</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://forums.linuxmint.com/viewforum.php?f=42" target="_blank">Linux Mint Forums &mdash; Tutorials</a></td>
+                        <td>Community-written tutorials and how-to guides</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://pentiumsoak.com/linux-mint-beginners-guide-2025-why-its-the-best-linux-distro-for-everyday-users/" target="_blank">PentiumSoak Beginner's Guide</a></td>
+                        <td>Why Mint is the best distro for everyday users (2025)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- .NET on Linux -->
+        <section id="dotnet">
+            <h2>.NET Development on Linux Mint</h2>
+
+            <h3>What Works Perfectly</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>ASP.NET Core (Web APIs, MVC, Blazor)</td><td><span class="status-works">Fully Supported</span></td></tr>
+                    <tr><td>Console Applications &amp; CLI Tools</td><td><span class="status-works">Fully Supported</span></td></tr>
+                    <tr><td>gRPC Services</td><td><span class="status-works">Fully Supported</span></td></tr>
+                    <tr><td>MCP Servers</td><td><span class="status-works">Native &mdash; No WSL needed</span></td></tr>
+                    <tr><td>AI Agents (Python, Node.js, .NET)</td><td><span class="status-works">Native</span></td></tr>
+                    <tr><td>Docker</td><td><span class="status-works">Native &mdash; Better than Windows</span></td></tr>
+                    <tr><td>Entity Framework Core</td><td><span class="status-works">Fully Supported</span></td></tr>
+                </tbody>
+            </table>
+
+            <h3>What Does NOT Work</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Status</th>
+                        <th>Alternative</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Visual Studio (full IDE)</td><td><span class="status-no">Not Available</span></td><td>JetBrains Rider or VS Code</td></tr>
+                    <tr><td>WinForms / WPF</td><td><span class="status-no">Windows Only</span></td><td>Avalonia UI, MAUI, or Blazor</td></tr>
+                    <tr><td>SQL Server Management Studio</td><td><span class="status-no">Not Available</span></td><td>Azure Data Studio or DBeaver</td></tr>
+                </tbody>
+            </table>
+
+            <h3>IDEs and Editors</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>VS Code</strong></td><td>First-class Linux support, C# Dev Kit extension</td></tr>
+                    <tr><td><strong>JetBrains Rider</strong></td><td>Best full IDE for .NET on Linux</td></tr>
+                    <tr><td><strong>Neovim + OmniSharp</strong></td><td>For terminal enthusiasts</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Installing .NET SDK on Mint</h3>
+            <div class="callout">
+                <strong>Note:</strong> Since Mint is Ubuntu-based, Microsoft's official Ubuntu instructions work perfectly.
+            </div>
+            <pre><span class="comment"># Add Microsoft package repository</span>
+<span class="command">wget</span> https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+<span class="command">sudo dpkg</span> -i packages-microsoft-prod.deb
+<span class="command">rm</span> packages-microsoft-prod.deb
+
+<span class="comment"># Install .NET SDK</span>
+<span class="command">sudo apt-get</span> update
+<span class="command">sudo apt-get</span> install -y dotnet-sdk-8.0</pre>
+        </section>
+
+        <!-- Learning Path -->
+        <section id="learning-path">
+            <h2>Suggested Learning Path</h2>
+            <div class="timeline">
+                <div class="timeline-step" data-step="1">
+                    <h4>Watch the LearnLinuxTV Series</h4>
+                    <p>Free, visual, beginner-friendly <a href="https://www.youtube.com/@LearnLinuxTV" target="_blank">YouTube series</a>. Best starting point.</p>
+                </div>
+                <div class="timeline-step" data-step="2">
+                    <h4>Install Linux Mint Cinnamon</h4>
+                    <p>Try it via USB first without installing. Get a feel for the desktop.</p>
+                </div>
+                <div class="timeline-step" data-step="3">
+                    <h4>Follow the Post-Install Checklist</h4>
+                    <p>Use the <a href="https://easylinuxtipsproject.blogspot.com/p/first-mint-cinnamon.html" target="_blank">Easy Linux Tips Project</a> guide to set things up right.</p>
+                </div>
+                <div class="timeline-step" data-step="4">
+                    <h4>Read "Learning Modern Linux" on O'Reilly</h4>
+                    <p>Build deeper understanding of the Linux ecosystem. <a href="https://www.oreilly.com/library/view/learning-modern-linux/9781098108939/" target="_blank">Read on O'Reilly</a>.</p>
+                </div>
+                <div class="timeline-step" data-step="5">
+                    <h4>Set Up Your Dev Environment</h4>
+                    <p>Install VS Code or Rider, .NET SDK, Docker, and your preferred tools.</p>
+                </div>
+                <div class="timeline-step" data-step="6">
+                    <h4>Learn Terminal Basics</h4>
+                    <p>Work through <a href="https://www.oreilly.com/library/view/the-linux-command/9781492071235/" target="_blank">"The Linux Command Line"</a> book on O'Reilly.</p>
+                </div>
+                <div class="timeline-step" data-step="7">
+                    <h4>Join the Community</h4>
+                    <p>Sign up at <a href="https://forums.linuxmint.com/" target="_blank">Linux Mint Forums</a> and <a href="https://www.reddit.com/r/linuxmint/" target="_blank">r/linuxmint</a> for support.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Built-in Tools -->
+        <section id="tools">
+            <h2>Useful Mint Built-in Tools</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Timeshift</h4>
+                    <p>System snapshots &mdash; like Windows System Restore, but significantly better. Set up before making system changes.</p>
+                </div>
+                <div class="card">
+                    <h4>Update Manager</h4>
+                    <p>Manages all system and application updates in one place with safety levels.</p>
+                </div>
+                <div class="card">
+                    <h4>Software Manager</h4>
+                    <p>GUI app store for browsing, installing, and removing software.</p>
+                </div>
+                <div class="card">
+                    <h4>Warpinator</h4>
+                    <p>Transfer files from your Windows machine to Mint over local network during migration.</p>
+                </div>
+                <div class="card">
+                    <h4>Nemo File Manager</h4>
+                    <p>Similar to Windows Explorer with dual pane support and built-in terminal.</p>
+                </div>
+                <div class="card">
+                    <h4>Driver Manager</h4>
+                    <p>Automatically detects and installs proprietary drivers for GPU, Wi-Fi, and more.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Linux Mint Cinnamon Migration Guide &mdash; Created April 2026</p>
+        <p>For a .NET developer migrating from Windows 10 to Linux Mint Cinnamon</p>
+    </footer>
+
+</body>
+</html>
